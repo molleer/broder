@@ -23,4 +23,17 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./backend/src:/usr/scr/app/src
+      - ./backend/src:/usr/src/app/src
+
+  frontend:
+    image: mollee/broder-frontend:dev
+    build:
+      context: ./frontend/
+      dockerfile: dev.Dockerfile
+    depends_on:
+      - backend
+    stdin_open: "true"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/usr/src/app/src
