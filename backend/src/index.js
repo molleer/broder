@@ -13,11 +13,11 @@ const pool = new pg.Pool({
 const app = express();
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("Hello there!");
 });
 
-app.post("/refueling", async (req, res) => {
+app.post("/api/refueling", async (req, res) => {
   const result = await pool
     .query(
       'INSERT INTO refueling ("user", cost_sek, amount_liters) VALUES ($1, $2, $3)',
@@ -34,7 +34,7 @@ app.post("/refueling", async (req, res) => {
   res.status(201).json({ success: true });
 });
 
-app.post("/driving", async (req, res) => {
+app.post("/api/driving", async (req, res) => {
   const result = await pool
     .query('INSERT INTO driving ("user", distance_nm) VALUES ($1, $2)', [
       req.body.user,

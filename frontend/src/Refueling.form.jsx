@@ -70,7 +70,7 @@ const RefuelingForm = ({ users, onSubmit }) => {
             onClick={() =>
               onSubmit({
                 user: user,
-                const_sek: Number(cost),
+                cost_sek: Number(cost),
                 amount_liters: Number(liters)
               })
             }
