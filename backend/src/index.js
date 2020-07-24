@@ -34,6 +34,16 @@ app.post("/api/refueling", async (req, res) => {
   res.status(201).json({ success: true });
 });
 
+app.get("/api/refueling", async (req, res) => {
+  const result = await pool.query("SELECT * FROM refueling", []).catch(err => {
+    res.status(400).json(err);
+  });
+
+  if (result) {
+    res.status(200).json(result.rows);
+  }
+});
+
 app.post("/api/driving", async (req, res) => {
   const result = await pool
     .query('INSERT INTO driving ("user", distance_nm) VALUES ($1, $2)', [
@@ -49,6 +59,16 @@ app.post("/api/driving", async (req, res) => {
   }
 
   res.status(201).json({ success: true });
+});
+
+app.get("/api/driving", async (req, res) => {
+  const result = await pool.query("SELECT * FROM driving", []).catch(err => {
+    res.status(400).json(err);
+  });
+
+  if (result) {
+    res.status(200).json(result.rows);
+  }
 });
 
 app.listen(8080, () => {
